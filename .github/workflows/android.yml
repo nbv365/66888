@@ -1,0 +1,25 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main  # 触发构建的分支，通常是 main 或 master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
+      with:
+        java-version: 8
+
+    - name: Set up Gradle
+      uses: gradle/wrapper-validation-action@v1
+
+    - name: Build APK
+      run: ./gradlew assembleRelease
