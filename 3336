@@ -1,0 +1,28 @@
+package com.example.snakegame
+
+import android.os.Bundle
+import android.view.MotionEvent
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.snakegame.view.GameView
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var gameView: GameView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        gameView = GameView(this)
+        setContentView(gameView)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        event?.let {
+            if (it.action == MotionEvent.ACTION_DOWN) {
+                gameView.onTouch(it.x, it.y)
+                return true
+            }
+        }
+        return super.onTouchEvent(event)
+    }
+}
